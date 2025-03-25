@@ -16,7 +16,7 @@ var startingJson = {
     "button_background":"#25D366"
   },
   "submit": {"label":"ORDINA ORA!","icon":""},
-  "redirect_url": "https://offerte-prodotti-casa.it/smartlamp/grazie_ordine.html"
+  "redirect_url": window.location.href.replace(/\/$/, "") + "/thankyou/"
 };
 
 $(document).ready(function($) {
