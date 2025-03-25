@@ -65,7 +65,7 @@ $(document).ready(function($) {
 
   $("#as_form_container").append(htmlResult);
 
-  $("#as_form_container").click(function(e) {
+  $("#as_submit_order_button").click(function(e) {
     e.preventDefault();
     $(".as-error").removeClass("as-error");
 
