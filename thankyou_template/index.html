@@ -1,20 +1,29 @@
 <!doctype html>
 <html>
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-000"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-000');
-</script>
 
 <meta charset="utf-8">
 <title>GRAZIE</title>
 <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,900%7CRoboto:400,500,700&amp;display=swap" rel="stylesheet">
 
+
+<!-- Google Tag Event snippet to track conversion (thank you page) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=000"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '000');
+</script>
+
+<script>
+  gtag('event', 'conversion', {
+      'send_to': '000/000',
+      'transaction_id': ''
+  });
+</script>
+<!-- end of Google Tag, it seems like we should put bothof them -->
   
 <!-- Facebook Pixel Code to track conversion (thank you page)-->
 <script>
