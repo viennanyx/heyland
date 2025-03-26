@@ -1,11 +1,42 @@
 var startingJson = {
   "form_fields": {
-    "name": {"label":"Nome","required":"true","classes":"col-lg-4 col-md-6 col-sm-12 mb-2","placeholder":"Nome e Cognome *"},
-    "phone_number": {"label":"Telefono","required":"true","classes":"col-lg-4 col-md-6 col-sm-12 mb-2","placeholder":"Cellulare *"},
-    "email": {"label":"Email","required":"false","classes":"col-lg-4 col-md-6 col-sm-12 mb-2","placeholder":"Email"},
-    "address": {"label":"Indirizzo","required":"false","classes":"col-lg-4 col-md-6 col-sm-12 mb-2","placeholder":"Indirizzo completo"},
-    "city": {"label":"Comune","required":"false","classes":"col-lg-4 col-md-6 col-sm-12 mb-2","placeholder":"Comune"},
-    "notes": {"label":"Note per il corriere","required":"false","classes":"col-sm-12 mb-2","placeholder":"Note per il Corriere","type":"textarea"}
+    "name": {
+      "label":"{{label_name}}",
+      "required":"true",
+      "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
+      "placeholder":"{{placeholder_name}}"
+    },
+    "phone_number": {
+      "label":"{{label_phone}}",
+      "required":"true",
+      "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
+      "placeholder":"{{placeholder_phone}}"
+    },
+    "email": {
+      "label":"{{label_email}}",
+      "required":"false",
+      "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
+      "placeholder":"{{placeholder_email}}"
+    },
+    "address": {
+      "label":"{{label_address}}",
+      "required":"false",
+      "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
+      "placeholder":"{{placeholder_address}}"
+    },
+    "city": {
+      "label":"{{label_city}}",
+      "required":"false",
+      "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
+      "placeholder":"{{placeholder_city}}"
+    },
+    "notes": {
+      "label":"{{label_notes}}",
+      "required":"false",
+      "classes":"col-sm-12 mb-2",
+      "placeholder":"{{placeholder_notes}}",
+      "type":"textarea"
+    }
   },
   "template": {
     "background":"#FFFFFF",
@@ -15,9 +46,13 @@ var startingJson = {
     "button_border":"#25D366",
     "button_background":"#25D366"
   },
-  "submit": {"label":"ORDINA ORA!","icon":""},
+  "submit": {
+    "label":"{{label_submit}}",
+    "icon":""
+  },
   "redirect_url": window.location.href.replace(/\/$/, "") + "/thankyou/"
 };
+
 
 $(document).ready(function($) {
   $(						  
