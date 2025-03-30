@@ -1,40 +1,40 @@
 var startingJson = {
   "form_fields": {
     "name": {
-      "label":"Nome",
+      "label":"Nombre",
       "required":"true",
       "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"Nome e Cognome *"
+      "placeholder":"Nombre y Apellidos *"
     },
     "phone_number": {
-      "label":"Telefono",
+      "label":"Teléfono",
       "required":"true",
       "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"Cellulare *"
+      "placeholder":"Móvil *"
     },
     "email": {
-      "label":"Email",
+      "label":"Correo electrónico",
       "required":"false",
       "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"Email"
+      "placeholder":"Correo electrónico"
     },
     "address": {
-      "label":"Indirizzo",
+      "label":"Dirección",
       "required":"false",
       "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"Indirizzo completo"
+      "placeholder":"Dirección completa"
     },
     "city": {
-      "label":"Comune",
+      "label":"Municipio",
       "required":"false",
       "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"Comune"
+      "placeholder":"Municipio"
     },
     "notes": {
-      "label":"Note per il corriere",
+      "label":"Notas para el mensajero",
       "required":"false",
       "classes":"col-sm-12 mb-2",
-      "placeholder":"Note per il Corriere",
+      "placeholder":"Notas para el Mensajero",
       "type":"textarea"
     }
   },
@@ -47,7 +47,7 @@ var startingJson = {
     "button_background":"#25D366"
   },
   "submit": {
-    "label":"ORDINA ORA!",
+    "label":"¡ORDENA AHORA!",
     "icon":""
   },
   "redirect_url": window.location.href.replace(/\/$/, "") + "/thankyou/"
