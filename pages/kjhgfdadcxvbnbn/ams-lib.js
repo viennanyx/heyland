@@ -1,16 +1,16 @@
 var startingJson = {
   "form_fields": {
     "name": {
-      "label":"Name",
+      "label":"Nome",
       "required":"true",
       "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"First and Last Name *"
+      "placeholder":"Nome e Cognome *"
     },
     "phone_number": {
-      "label":"Phone",
+      "label":"Telefono",
       "required":"true",
       "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"Mobile *"
+      "placeholder":"Cellulare *"
     },
     "email": {
       "label":"Email",
@@ -19,22 +19,22 @@ var startingJson = {
       "placeholder":"Email"
     },
     "address": {
-      "label":"Address",
+      "label":"Indirizzo",
       "required":"false",
       "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"Full Address"
+      "placeholder":"Indirizzo completo"
     },
     "city": {
-      "label":"City",
+      "label":"Comune",
       "required":"false",
       "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"City"
+      "placeholder":"Comune"
     },
     "notes": {
-      "label":"Notes for the courier",
+      "label":"Note per il corriere",
       "required":"false",
       "classes":"col-sm-12 mb-2",
-      "placeholder":"Notes for the Courier",
+      "placeholder":"Note per il Corriere",
       "type":"textarea"
     }
   },
@@ -47,7 +47,7 @@ var startingJson = {
     "button_background":"#25D366"
   },
   "submit": {
-    "label":"ORDER NOW!",
+    "label":"ORDINA ORA!",
     "icon":""
   },
   "redirect_url": window.location.href.replace(/\/$/, "") + "/thankyou/"
