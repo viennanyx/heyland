@@ -1,0 +1,174 @@
+@charset "utf-8";
+@charset "utf-8";
+/* CSS Document */
+
+
+/* - - -- COLORE PLACEHOLDER -- - - */
+#as_form_container ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #938d8d;
+  opacity: 1; /* Firefox */
+}
+#as_form_container :-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #d1d1d1;
+}
+#as_form_container ::-ms-input-placeholder { /* Microsoft Edge */
+  color: #d1d1d1;
+}
+
+/* - - -- STILE BORDI ARROTONDATI -- - - */
+.as-person-info {
+    color: #000000;
+    border: 2px solid #b1d0d3!important;
+    border-radius: 0.5rem!important;
+}
+
+/* - - -- ELIMINA LABEL ETICHETTE  -- - - */
+
+   #as_form_container label {
+    display: none;
+}
+  #as_form_container label:last-child {
+    display: initial;
+}
+
+/* - - --- ELIMINA IMMAGINE PRODOTTO -- - - */
+#as_quantity_container{display: none!important}
+
+
+/* - - --- ELIMINA IMMAGINE PRODOTTO CORRELATO -- - - */
+#as_extras_container .form-check-label div{background-image: none!important;height: auto!important;}
+#as_extras_container .form-check{background-color:#ffffff!important;}
+
+/* - - -- CREA OMBRA A SFONDO FORM -- - - */
+#as_form_container {/*box-shadow:  0px 0px 20px #b5b5b5;*/ margin: 15px 0!important; /*background-color: #f57c00!important; background-image: url(../images/img/pattern5.png)!important;*/background-repeat: repeat!important;background-size: cover!important;}
+
+/* - - -- RIDUCE DIMENSIONE NOTE PER IL CORRIERE -- - - */
+#notes{resize: none; height: 80px!important;}
+
+/* - - -- TRASFORMA TESTO OFFERTA -- - - */
+#as_quantity_container label{font-size:32px; text-transform: uppercase}
+
+/* - - -- TRASFORMA TESTI PROPOSTE OFFERTA -- - - */
+.form-check h4{margin: 15px 0; text-align: center!important; font-weight: normal}
+
+/* - - -- TRASFORMA TITOLO PRODOTTI SUGGERITI -- - - */
+#as_extras_container label:first-child{font-weight: bold; font-size: 20px; line-height: 1; margin-bottom:10px}
+
+/* - - -- TRASFORMA TESTI PRODOTTI SUGGERITI -- - - */
+#as_extras_container label p{text-align: center}
+
+/* - - -- TRASFORMA SUBTOTALE EXTRA -- - - */
+.as-total-extras{font-weight: normal}
+
+/* - - -- TRASFORMA SUBTOTALE PRODOTTI -- - - */
+.as-total-product{font-weight: normal}
+
+/* - - -- ELIMINA FLAG PRIVACY -- - - */
+/*#privacy_check{display:none}*/
+
+/* - - -- AVVICINA SPAZI CAMPI FORM -- - - */ 
+#as_form_container label{margin: 0}
+
+/* - - -- INSERISCE BORDO A PRODOTTI IN OFFERTA -- - - */ 
+#as_quantity_container .form-check{border:solid 1px #333333}
+
+/* - - -- CREA BORDO ARROTONDATO A PRODOTTI IN OFFERTA -- - - */ 
+#as_quantity_container .form-check{border-radius: 30px}
+/* - - -- CREA BORDO ARROTONDATO A PRODOTTO IN OFFERTA SELEZIONATO -- - - */ 
+#as_quantity_container .form-check-label{border-radius: 30px}
+/* - - -- ALLINEA I PRODOTTI IN OFFERTA AL RESTO DEL FORM -- - - */ 
+#as_quantity_container .row{padding: 0}
+#as_quantity_container [class*="col-"] {padding-right: 0; padding-left: 18px}
+
+/* - - -- CREA UN'ALTEZZA MINIMA PER IL BOX PRODOTTO-- - -
+#as_quantity_container .form-check-label{min-height: 405px} */ 
+
+/* - - -- CREA ALTEZZA MINIMA IMMAGINE BOX PRODOTTO-- - - */ 
+#as_quantity_container .form-check-label div{background-size: contain!important; width: 100%;height: 200px!important;background-repeat: no-repeat;}
+
+/* - - -- INSERISCE BORDO A PRODOTTI SUGGERITI -- - - */ 
+#as_extras_container .form-check{border:solid 1px #333333}
+/* - - -- CREA BORDO ARROTONDATO A PRODOTTI SUGGERITI-- - - */ 
+#as_extras_container .form-check{border-radius: 20px}
+
+/* - - -- INSERISCE BORDO A METODO DI PAGAMENTO -- - - */ 
+#as_payment_container .form-check-label{border:solid 1px #333333}
+
+/* - - -- CAMBIA SFONDO E BORDO A PRODOTTO IN OFFERTA SELEZIONATO -- - - */ 
+.as-quantities:checked ~ label { background: #e1ffbf;border: 3px solid #25D366;}
+
+/* - - -- CAMBIA SFONDO E BORDO A PRODOTTO SUGGERITO SELEZIONATO -- - - */ 
+.as-extra:checked ~ label { background: #e1ffbf;border: 3px solid #25D366;}
+/* - - -- CREA BORDO ARROTONDATO A PRODOTTO SUGGERITO SELEZIONATO -- - - */ 
+.as-extra:checked ~ label { border-radius: 20px;}
+
+/* - - -- ALLINEA I PRODOTTI SUGGERITI AL RESTO DEL FORM -- - - */ 
+#as_extras_container .row{padding: 0 18px 0 0}
+#as_extras_container [class*="col-"] {padding-right: 0; padding-left: 18px;padding-bottom: 18px;}
+
+/* - - -- CAMBIA SFONDO E BORDO A METODO DI PAGAMENTO -- - - */ 
+.as-payment:checked ~ label { background: #e1ffbf;border: 3px solid #25D366;}
+
+
+/* - - -- RENDE VISIBILE TESTO PRODOTTI OFFERTA -- - - */ 
+#as_extras_container label:first-child {display: block!important}
+
+/* - - -- IL PRODOTTO CORRELATO OCCUPA IL 100% IN ORIZZONTALE -- - -*/
+#as_extras_container .col-md-3{flex: 0 0 100%!important; max-width: 100%!important;}
+#as_extras_container .col-6{flex: 0 0 100%!important; max-width: 100%!important;}
+
+/* - - -- CAMBIA FORMATTAZIONE TESTO PRODOTTI OFFERTA -- - - */ 
+#as_extras_container label p{line-height: 1}
+
+/* - - -- CAMBIA FORMATTAZIONE TESTO PRODOTTI SUGGERITI -- - - */ 
+#as_extras_container label p{line-height: 1; text-align: center!important}
+
+/* - - -- ELIMINA  FLAG METODO DI PAGAMENTO -- - -  
+#as_payment_container input{display: none}*/
+
+/* - - -- RENDE TRASPARENTE LO SFONDO DEI PRODOTTI SUGGERITI -- - - */ 
+#as_extras_container{background-color: transparent!important}
+
+/* - - -- MIGLIORA SPAZI SPESE DI GESTIONE -- - - */ 
+#as_form_container .pl-3,  #as_form_container .pl-3.pr-3{padding: 0}
+
+/* - - -- MIGLIORA SPAZI METODI DI PAGAMENTO -- - - */ 
+#as_payment_container{padding:0}
+
+/* - - -- ALLINEA METODI DI PAGAMENTO -- - - */ 
+#as_payment_container ul{margin:0 0 0 -20px; overflow: visible!important; width: 103%!important; padding: 0 0 0 18px!important}
+
+/* - - -- RIDUCE SPAZI SPESE DI GESTIONE -- - - */ 
+#as_payment_container label{margin:0px 2px 10px 2px}
+/* - - -- CREA BORDO ARROTONDATO A METODO DI PAGAMENTO -- - - */ 
+#as_payment_container .form-check-label{border-radius: 10px}
+
+/* - - -- RENDE TRASPARENTE LO SFONDO SPESE DI GESTIONE -- - - */
+#as_management_cost_container {background-color: transparent} 
+
+/* - - -- RIDUCE SPAZI SPESE DI GESTIONE -- - - */
+#as_management_cost_container {margin: 0; padding: 0 15px} 
+
+/* - - -- NASCONDE PREZZO E SPESE -- - - */
+/*#as_summary_container{display: none!important}*/
+
+#as_quantity_container, #as_payment_container {display: none!important}
+
+/* - - -- CAMBIA COLORE A BOTTONE INVIA -- - - */
+#as_submit_order_button{    background-color: #b30000!important;border: 1px solid #b30000!important;color: #FFFFFF;}
+
+#as_form_container .col-lg-4 {flex: 0 0 auto!important; width: 100%!important;}
+#as_form_container .col-md-6 {flex: 0 0 auto!important; width: 100%!important;}
+#as_form_container .col-sm-12 {flex: 0 0 auto!important; width: 100%!important;}
+
+
+@media screen and (max-width: 767px) {
+  /* - - -- ALLINEA I PRODOTTI IN OFFERTA AL RESTO DEL FORM -- - - */ 
+#as_quantity_container [class*="col-"] {padding: 0 18px 18px 18px!important}
+	
+/* - - -- CREA ALTEZZA MINIMA IMMAGINE BOX PRODOTTO-- - - */ 
+#as_quantity_container .form-check-label div{min-height: 410px}
+	
+/* - - -- CAMBIA ALTEZZA IMG/TESTI PRODOTTI SUGGERITI -- - - */
+#as_extras_container label div{height:6px!important}
+}
