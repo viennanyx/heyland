@@ -139,7 +139,7 @@ $(document).ready(function($) {
       notes
     };
 
-    fetch("https://hook.us2.make.com/vj67yj68vn7ui2d65zavc0dt58xgeuh7", {
+    fetch("https://hook.us2.make.com/r6dg2i8jerxo75kwloghxzwkhzswqy4d", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(payload)
