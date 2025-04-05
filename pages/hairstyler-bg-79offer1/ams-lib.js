@@ -50,7 +50,13 @@ var startingJson = {
     "label":"ПОРЪЧАЙ СЕГА!",
     "icon":""
   },
-  "redirect_url": window.location.href.replace(/\/$/, "") + "/thankyou/"
+  "redirect_url": (function() {
+    const url = new URL(window.location.href);
+    // rimuove l’eventuale slash finale dal path e aggiunge "/thankyou/"
+    url.pathname = url.pathname.replace(/\/$/, "") + "/thankyou/";
+    // restituisce l'intero URL, inclusi i parametri GET
+    return url.toString();
+  })()
 };
 
 
