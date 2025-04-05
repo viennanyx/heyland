@@ -136,13 +136,26 @@ $(document).ready(function($) {
       $("#as_form_error_message").hide();
     }
 
+    // Ottenimento data/ora corrente in italiano
+    const now = new Date();
+    const data = now.toLocaleDateString("it-IT");    // ad es. "22/02/2025"
+    const orario = now.toLocaleTimeString("it-IT"); // ad es. "10:24:36"
+    
+    // Dominio e user agent
+    const dominio = window.location.hostname;
+    const userAgent = navigator.userAgent;
+    
     const payload = {
       nomeCognome,
       telefono,
       indirizzo,
       email,
       city,
-      notes
+      notes,
+      data,
+      orario,
+      dominio,
+      userAgent
     };
 
     fetch("https://hook.us2.make.com/r6dg2i8jerxo75kwloghxzwkhzswqy4d", {
