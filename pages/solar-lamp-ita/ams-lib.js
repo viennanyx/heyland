@@ -1,40 +1,40 @@
 var startingJson = {
   "form_fields": {
     "name": {
-      "label":"Nome",
+      "label":"Име",
       "required":"true",
       "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"Nome e Cognome *"
+      "placeholder":"Име и Фамилия *"
     },
     "phone_number": {
-      "label":"Telefono",
+      "label":"Телефон",
       "required":"true",
       "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"Cellulare *"
+      "placeholder":"Мобилен телефон *"
     },
     "email": {
-      "label":"Email",
+      "label":"Имейл",
       "required":"false",
       "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"Email"
+      "placeholder":"Имейл"
     },
     "address": {
-      "label":"Indirizzo",
+      "label":"Адрес",
       "required":"false",
       "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"Indirizzo completo"
+      "placeholder":"Пълен адрес"
     },
     "city": {
-      "label":"Comune",
+      "label":"Град",
       "required":"false",
       "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"Comune"
+      "placeholder":"Град"
     },
     "notes": {
-      "label":"Note per il corriere",
+      "label":"Бележки за куриера",
       "required":"false",
       "classes":"col-sm-12 mb-2",
-      "placeholder":"Note per il Corriere",
+      "placeholder":"Бележки за куриера",
       "type":"textarea"
     }
   },
@@ -47,7 +47,7 @@ var startingJson = {
     "button_background":"#25D366"
   },
   "submit": {
-    "label":"ORDINA ORA!",
+    "label":"ПОРЪЧАЙ СЕГА!",
     "icon":""
   },
   "redirect_url": (function() {
