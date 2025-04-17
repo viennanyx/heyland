@@ -93,13 +93,15 @@ $(document).ready(function($) {
   htmlResult += "<div id='as_submit_container' class='col-lg-5 col-sm-12'></div>";
 
   htmlResult += "<div id='as_form_error_message' class='w-100 pt-2 pb-2 mt-2 text-center' style='display:none;background-color:#f9fcbb'>"
-    + "Per favore controlla i campi inseriti e riprova."
+    + "{{form_error_message}}"
     + "</div>";
 
-  htmlResult += "<div id='as_generic_error_message' class='w-100 pt-2 pb-2 mt-2 text-center' style='display:none;background-color:#f9fcbb'></div>";
+  htmlResult += "<div id='as_generic_error_message' class='w-100 pt-2 pb-2 mt-2 text-center' style='display:none;background-color:#f9fcbb'>"
+    + "{{generic_error_message}}"
+    + "</div>";
 
   htmlResult += "<div id='as_500_error_message' class='w-100 pt-2 pb-2 mt-2 text-center' style='display:none;background-color:#ea5252'>"
-    + "Errore nell'invio dei dati."
+    + "{{server_error_message}}"
     + "</div>";
 
   htmlResult += "<button id='as_submit_order_button' type='submit' class='btn btn-info w-100 mt-2' style='background-color:" + startingJson.template.button_background + "; border:1px solid " + startingJson.template.button_border + "; color:" + startingJson.template.button_color + ";'>" + startingJson.submit.label + "</button>";
@@ -136,10 +138,11 @@ $(document).ready(function($) {
       $("#as_form_error_message").hide();
     }
 
-    // Ottenimento data/ora corrente in italiano
+    // Ottenimento data/ora corrente nella lingua della pagina
     const now = new Date();
-    const data = now.toLocaleDateString("it-IT");    
-    const orario = now.toLocaleTimeString("it-IT"); 
+    const pageLang = document.documentElement.lang || navigator.language || 'en';
+    const data = now.toLocaleDateString(pageLang);
+    const orario = now.toLocaleTimeString(pageLang);
     
     // Dominio e user agent
     const dominio = window.location.hostname;
