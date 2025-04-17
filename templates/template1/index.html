@@ -151,6 +151,7 @@
                   <img src="assets/images/img/img8.jpg" class="img-fluid mb-2" alt="">
                 </div>
               </div>
+               <div class="swiper-pagination1"></div>
         </div>
             <!-- End Slider main container --> 
         </div>
@@ -219,6 +220,7 @@
                   </figure>
                 </div>
               </div>
+               <div class="swiper-pagination2"></div>
         </div>
             <!-- End Slider main container --> 
           </div>
@@ -352,66 +354,46 @@
       spaceBetween: 50,
       loop: true,
       centeredSlides: false,
-    slidesPerView: 1,
+      slidesPerView: 1,
       autoplay: {
-        delay: 3500,
-        disableOnInteraction: false,
+          delay: 3500,
+          disableOnInteraction: false,
       },
       pagination: {
-        el: '.swiper-pagination1',
-        clickable: true,
+          el: '.swiper-pagination1',
+          clickable: true,
       },
-   breakpoints: {
-        640: {
-          slidesPerView: 3,
-          spaceBetween: 50,
-        },
-        768: {
-          slidesPerView: 3,
-          spaceBetween: 50,
-        },
-        1024: {
-          slidesPerView: 3,
-          spaceBetween: 50,
-        },
-    1800: {
-          slidesPerView: 3,
-          spaceBetween: 50,
-        },
+      observer: true,
+      observeParents: true,
+      breakpoints: {
+          640: { slidesPerView: 3, spaceBetween: 50 },
+          768: { slidesPerView: 3, spaceBetween: 50 },
+          1024: { slidesPerView: 3, spaceBetween: 50 },
+          1800: { slidesPerView: 3, spaceBetween: 50 }
       }
-    });
-    var swiper2 = new Swiper('.swiper2', {
+  });
+  var swiper2 = new Swiper('.swiper2', {
       spaceBetween: 50,
-    loop: true,
+      loop: true,
       centeredSlides: false,
-    slidesPerView: 1,
+      slidesPerView: 1,
       autoplay: {
-        delay: 3500,
-        disableOnInteraction: false,
+          delay: 3500,
+          disableOnInteraction: false,
       },
       pagination: {
-        el: '.swiper-pagination2',
-        clickable: true,
+          el: '.swiper-pagination2',
+          clickable: true,
       },
-   breakpoints: {
-        640: {
-          slidesPerView: 2,
-          spaceBetween: 180,
-        },
-        768: {
-          slidesPerView: 2,
-          spaceBetween: 180,
-        },
-        1024: {
-          slidesPerView: 2,
-          spaceBetween: 180,
-        },
-    1800: {
-          slidesPerView: 6,
-          spaceBetween: 50,
-        },
+      observer: true,
+      observeParents: true,
+      breakpoints: {
+          640: { slidesPerView: 3, spaceBetween: 50 },
+          768: { slidesPerView: 3, spaceBetween: 50 },
+          1024: { slidesPerView: 3, spaceBetween: 50 },
+          1800: { slidesPerView: 3, spaceBetween: 50 }
       }
-    });
+  });
   var swiper3 = new Swiper('.swiper3', {
       spaceBetween: 30,
      loop: true,
