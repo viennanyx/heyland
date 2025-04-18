@@ -348,109 +348,55 @@
 <script src="assets/js/scrollspy.js"></script> 
 
 <!-- Initialize Swiper --> 
-
 <script>
-  var swiper1 = new Swiper('.swiper1', {
-      spaceBetween: 50,
-      loop: true,
-      centeredSlides: false,
-      slidesPerView: 1,
-      autoplay: {
-          delay: 3500,
-          disableOnInteraction: false,
-      },
-      pagination: {
-          el: '.swiper-pagination1',
-          clickable: true,
-      },
-      observer: true,
-      observeParents: true,
-      breakpoints: {
-          640: { slidesPerView: 3, spaceBetween: 50 },
-          768: { slidesPerView: 3, spaceBetween: 50 },
-          1024: { slidesPerView: 3, spaceBetween: 50 },
-          1800: { slidesPerView: 3, spaceBetween: 50 }
-      }
-  });
-  var swiper2 = new Swiper('.swiper2', {
-      spaceBetween: 50,
-      loop: true,
-      centeredSlides: false,
-      slidesPerView: 1,
-      autoplay: {
-          delay: 3500,
-          disableOnInteraction: false,
-      },
-      pagination: {
-          el: '.swiper-pagination2',
-          clickable: true,
-      },
-      observer: true,
-      observeParents: true,
-      breakpoints: {
-          640: { slidesPerView: 3, spaceBetween: 50 },
-          768: { slidesPerView: 3, spaceBetween: 50 },
-          1024: { slidesPerView: 3, spaceBetween: 50 },
-          1800: { slidesPerView: 3, spaceBetween: 50 }
-      }
-  });
-  var swiper3 = new Swiper('.swiper3', {
-      spaceBetween: 30,
-     loop: true,
-      centeredSlides: false,
-    slidesPerView: 6,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: '.swiper-pagination3',
-        clickable: true,
-      },
-   breakpoints: {
-        640: {
-          slidesPerView: 6,
-          spaceBetween: 30,
+document.addEventListener('DOMContentLoaded', function() {
+    var swiper1 = new Swiper('.swiper1', {
+        spaceBetween: 50,
+        loop: true,
+        centeredSlides: false,
+        slidesPerView: 1,
+        autoplay: {
+            delay: 3500,
+            disableOnInteraction: false,
         },
-        768: {
-          slidesPerView: 6,
-          spaceBetween: 30,
+        pagination: {
+            el: '.swiper-pagination1',
+            clickable: true,
         },
-        1024: {
-          slidesPerView: 6,
-          spaceBetween: 30,
-        },
-      }
+        observer: true,
+        observeParents: true,
+        breakpoints: {
+            640: { slidesPerView: 3, spaceBetween: 50 },
+            768: { slidesPerView: 3, spaceBetween: 50 },
+            1024: { slidesPerView: 3, spaceBetween: 50 },
+            1800: { slidesPerView: 3, spaceBetween: 50 }
+        }
     });
-  var swiper4 = new Swiper('.swiper4', {
-      spaceBetween: 30,
-    loop: true,
-      centeredSlides: false,
-    slidesPerView: 1,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: '.swiper-pagination3',
-        clickable: true,
-      },
-   breakpoints: {
-        640: {
-          slidesPerView: 1,
-          spaceBetween: 30,
+    var swiper2 = new Swiper('.swiper2', {
+        spaceBetween: 50,
+        loop: true,
+        centeredSlides: false,
+        slidesPerView: 1,
+        autoplay: {
+            delay: 3500,
+            disableOnInteraction: false,
         },
-        768: {
-          slidesPerView: 1,
-          spaceBetween: 30,
+        pagination: {
+            el: '.swiper-pagination2',
+            clickable: true,
         },
-        1024: {
-          slidesPerView: 1,
-          spaceBetween: 30,
-        },
-      }
+        observer: true,
+        observeParents: true,
+        breakpoints: {
+            640: { slidesPerView: 3, spaceBetween: 50 },
+            768: { slidesPerView: 3, spaceBetween: 50 },
+            1024: { slidesPerView: 3, spaceBetween: 50 },
+            1800: { slidesPerView: 3, spaceBetween: 50 }
+        }
     });
-</script> 
+});
+</script>
+
 <script>
 wow = new WOW(
                       {
