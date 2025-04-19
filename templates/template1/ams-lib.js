@@ -126,13 +126,18 @@ $(document).ready(function($) {
       dominio: window.location.hostname,
       userAgent: navigator.userAgent,
       prodotto: "{{prodotto}}",
-      custom_data: customData
+      custom_data: customData,
+      test_event_code: "TEST15338"
     };
 
     fetch("{{capi_endpoint}}", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(payload)
+    }).then(response => {
+      if (!response.ok) {
+        console.error("CAPI error:", response.status, response.statusText);
+      }
     }).catch(error => console.error("Errore invio CAPI:", error));
   }
 
