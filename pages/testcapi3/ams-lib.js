@@ -126,13 +126,18 @@ $(document).ready(function($) {
       dominio: window.location.hostname,
       userAgent: navigator.userAgent,
       prodotto: "Termoconvettore elettrico a 79€ in colore bianco",
-      custom_data: customData
+      custom_data: customData,
+      test_event_code: "TEST15338"
     };
 
     fetch("http://165.22.209.196:8000/capi", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(payload)
+    }).then(response => {
+      if (!response.ok) {
+        console.error("CAPI error:", response.status, response.statusText);
+      }
     }).catch(error => console.error("Errore invio CAPI:", error));
   }
 
