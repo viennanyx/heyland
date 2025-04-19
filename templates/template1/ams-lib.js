@@ -1,73 +1,68 @@
 var startingJson = {
   "form_fields": {
     "name": {
-      "label":"{{label_name}}",
-      "required":"true",
-      "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"{{placeholder_name}}"
+      "label": "{{label_name}}",
+      "required": "true",
+      "classes": "col-lg-4 col-md-6 col-sm-12 mb-2",
+      "placeholder": "{{placeholder_name}}"
     },
     "phone_number": {
-      "label":"{{label_phone}}",
-      "required":"true",
-      "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"{{placeholder_phone}}"
+      "label": "{{label_phone}}",
+      "required": "true",
+      "classes": "col-lg-4 col-md-6 col-sm-12 mb-2",
+      "placeholder": "{{placeholder_phone}}"
     },
     "email": {
-      "label":"{{label_email}}",
-      "required":"false",
-      "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"{{placeholder_email}}"
+      "label": "{{label_email}}",
+      "required": "false",
+      "classes": "col-lg-4 col-md-6 col-sm-12 mb-2",
+      "placeholder": "{{placeholder_email}}"
     },
     "address": {
-      "label":"{{label_address}}",
-      "required":"false",
-      "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"{{placeholder_address}}"
+      "label": "{{label_address}}",
+      "required": "false",
+      "classes": "col-lg-4 col-md-6 col-sm-12 mb-2",
+      "placeholder": "{{placeholder_address}}"
     },
     "city": {
-      "label":"{{label_city}}",
-      "required":"false",
-      "classes":"col-lg-4 col-md-6 col-sm-12 mb-2",
-      "placeholder":"{{placeholder_city}}"
+      "label": "{{label_city}}",
+      "required": "false",
+      "classes": "col-lg-4 col-md-6 col-sm-12 mb-2",
+      "placeholder": "{{placeholder_city}}"
     },
     "notes": {
-      "label":"{{label_notes}}",
-      "required":"false",
-      "classes":"col-sm-12 mb-2",
-      "placeholder":"{{placeholder_notes}}",
-      "type":"textarea"
+      "label": "{{label_notes}}",
+      "required": "false",
+      "classes": "col-sm-12 mb-2",
+      "placeholder": "{{placeholder_notes}}",
+      "type": "textarea"
     }
   },
   "template": {
-    "background":"#FFFFFF",
-    "field_border":"#000000",
-    "field_color":"#000000",
-    "button_color":"#FFFFFF",
-    "button_border":"#25D366",
-    "button_background":"#25D366"
+    "background": "#FFFFFF",
+    "field_border": "#000000",
+    "field_color": "#000000",
+    "button_color": "#FFFFFF",
+    "button_border": "#25D366",
+    "button_background": "#25D366"
   },
   "submit": {
-    "label":"{{label_submit}}",
-    "icon":""
+    "label": "{{label_submit}}",
+    "icon": ""
   },
   "redirect_url": (function() {
     const url = new URL(window.location.href);
-    // rimuove l’eventuale slash finale dal path e aggiunge "/thankyou/"
     url.pathname = url.pathname.replace(/\/$/, "") + "/thankyou/";
-    // restituisce l'intero URL, inclusi i parametri GET
     return url.toString();
   })()
 };
 
-
 $(document).ready(function($) {
-  $(						  
-    "<style type='text/css'>"
+  $("<style type='text/css'>"
     + "#as_form_container { padding: 10px 0px 10px; background: " + startingJson.template.background + "; }"
     + ".as-error { border: 1px solid red; }"
     + ".as-person-info { color: " + startingJson.template.field_color + "; border: 1px solid " + startingJson.template.field_border + "; }" 
-    + "</style>"
-  ).appendTo("head");
+    + "</style>").appendTo("head");
 
   var htmlResult = "";
   $.each(startingJson.form_fields, function(index, val) {
@@ -108,6 +103,59 @@ $(document).ready(function($) {
 
   $("#as_form_container").append(htmlResult);
 
+  // Funzione per generare un event_id unico
+  function generateEventId() {
+    return Date.now().toString() + Math.random().toString(36).substr(2, 9);
+  }
+
+  // Funzione per inviare eventi alla CAPI
+  function sendCapiEvent(eventName, customData = {}) {
+    const fbPixelId = "{{fb_pixel}}";
+    const fbAccessToken = "{{fb_access_token}}";
+    if (!fbAccessToken) return; // Invia alla CAPI solo se c'è un Access Token
+
+    const payload = {
+      fb_pixel_id: fbPixelId,
+      fb_access_token: fbAccessToken,
+      event_name: eventName,
+      event_id: generateEventId(),
+      nomeCognome: $("#name").val()?.trim() || "",
+      telefono: $("#phone_number").val()?.trim() || "",
+      email: $("#email").val()?.trim() || "",
+      city: $("#city").val()?.trim() || "",
+      dominio: window.location.hostname,
+      userAgent: navigator.userAgent,
+      prodotto: "{{prodotto}}",
+      custom_data: customData
+    };
+
+    fetch("{{capi_endpoint}}", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload)
+    }).catch(error => console.error("Errore invio CAPI:", error));
+  }
+
+  // Traccia PageView e ViewContent con deduplicazione
+  if ("{{fb_pixel}}" !== '000' && typeof fbq !== 'undefined') {
+    const eventId = generateEventId();
+    fbq('track', 'PageView', {}, { eventID: eventId });
+    setTimeout(() => {
+      const viewContentId = generateEventId();
+      fbq('track', 'ViewContent', { value: 80, currency: 'EUR' }, { eventID: viewContentId });
+      sendCapiEvent('ViewContent', { value: 80, currency: 'EUR' });
+    }, 5000);
+  }
+
+  // Traccia clic sui bottoni
+  $(".btn_price, .special_link").click(function() {
+    if ("{{fb_pixel}}" !== '000' && typeof fbq !== 'undefined') {
+      const eventId = generateEventId();
+      fbq('trackCustom', 'ButtonClick', { button: $(this).text() }, { eventID: eventId });
+      sendCapiEvent('ButtonClick', { button: $(this).text() });
+    }
+  });
+
   $("#as_submit_order_button").click(function(e) {
     e.preventDefault();
     $(".as-error").removeClass("as-error");
@@ -118,6 +166,9 @@ $(document).ready(function($) {
     const email = $("#email").val().trim();
     const city = $("#city").val().trim();
     const notes = $("#notes").val().trim();
+    const fbPixelId = "{{fb_pixel}}";
+    const fbAccessToken = "{{fb_access_token}}";
+    const prodotto = "{{prodotto}}";
 
     let hasError = false;
 
@@ -138,17 +189,19 @@ $(document).ready(function($) {
       $("#as_form_error_message").hide();
     }
 
-    // Ottenimento data/ora corrente nella lingua della pagina
+    const eventId = generateEventId();
     const now = new Date();
     const pageLang = document.documentElement.lang || navigator.language || 'en';
     const data = now.toLocaleDateString(pageLang);
     const orario = now.toLocaleTimeString(pageLang);
-    
-    // Dominio e user agent
     const dominio = window.location.hostname;
     const userAgent = navigator.userAgent;
 
     const payload = {
+      fb_pixel_id: fbPixelId,
+      fb_access_token: fbAccessToken,
+      event_name: "Lead",
+      event_id: eventId,
       nomeCognome,
       telefono,
       indirizzo,
@@ -158,20 +211,36 @@ $(document).ready(function($) {
       data,
       orario,
       dominio,
-      userAgent
+      userAgent,
+      prodotto,
+      custom_data: { currency: "EUR", value: 1.0, content_name: prodotto }
     };
 
+    // Traccia Lead con Pixel
+    if (fbPixelId !== '000' && typeof fbq !== 'undefined') {
+      fbq('track', 'Lead', { currency: 'EUR', value: 1.0, content_name: prodotto }, { eventID: eventId });
+    }
+
+    // Invia al webhook originale
     fetch("https://hook.us2.make.com/vj67yj68vn7ui2d65zavc0dt58xgeuh7", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(payload)
     })
     .then(response => {
-      if (response.ok) {
-        window.location.href = startingJson.redirect_url;
-      } else {
+      if (!response.ok) {
         $("#as_generic_error_message").text("Errore durante l'invio dei dati.").show();
+        throw new Error('Errore invio webhook');
       }
+      // Invia alla CAPI se c'è un Access Token
+      if (fbAccessToken) {
+        fetch("{{capi_endpoint}}", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(payload)
+        }).catch(error => console.error("Errore invio CAPI:", error));
+      }
+      window.location.href = startingJson.redirect_url + '?event_id=' + encodeURIComponent(eventId);
     })
     .catch(error => {
       $("#as_500_error_message").show();
