@@ -158,7 +158,6 @@ $(document).ready(function($) {
           delay *= 2; // Exponential backoff
         } else {
           console.error(`Failed to send CAPI event '${eventName}' after ${retries} attempts`);
-          $("#as_generic_error_message").text("Errore durante l'invio dei dati al server. Riprova.").show();
           // Fallback: Track client-side
           if (fbPixelId !== '000' && typeof fbq !== 'undefined') {
             fbq('track', eventName, customData, { eventID: payload.event_id });
@@ -267,11 +266,7 @@ $(document).ready(function($) {
       }
       // Invia alla CAPI se c'è un Access Token
       if (fbAccessToken) {
-        fetch("{{capi_endpoint}}", {
-          method: "POST",
-          headers: {"Content-Type": "application/json"},
-          body: JSON.stringify(payload)
-        }).catch(error => console.error("Errore invio CAPI:", error));
+        sendCapiEvent("Lead", { currency: "EUR", value: 1.0, content_name: prodotto });
       }
       window.location.href = startingJson.redirect_url + '?event_id=' + encodeURIComponent(eventId);
     })
@@ -280,4 +275,6 @@ $(document).ready(function($) {
       console.error("Errore invio webhook:", error);
     });
   });
+
+
 });
