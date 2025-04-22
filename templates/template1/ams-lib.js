@@ -108,8 +108,8 @@ $(document).ready(function($) {
     return Date.now().toString() + Math.random().toString(36).substr(2, 9);
   }
 
-  // Funzione per inviare eventi alla CAPI
-  function sendCapiEvent(eventName, customData = {}) {
+  // Funzione per inviare eventi alla CAPI con retry
+  async function sendCapiEvent(eventName, customData = {}, retries = 3, delay = 1000) {
     const fbPixelId = "{{fb_pixel}}";
     const fbAccessToken = "{{fb_access_token}}";
     if (!fbAccessToken) {
@@ -133,31 +133,40 @@ $(document).ready(function($) {
       test_event_code: "TEST15338"
     };
 
-    fetch("{{capi_endpoint}}", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(payload),
-      mode: "cors", // Explicitly set CORS mode
-      credentials: "include" // Include credentials if needed
-    })
-      .then(response => {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        const response = await fetch("{{capi_endpoint}}/capi", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(payload),
+          mode: "cors",
+          credentials: "include"
+        });
+
         if (!response.ok) {
-          console.error(`CAPI error: ${response.status} - ${response.statusText}`);
-          throw new Error(`CAPI request failed with status ${response.status}`);
+          throw new Error(`CAPI request failed with status ${response.status}: ${response.statusText}`);
         }
-        return response.json();
-      })
-      .then(data => {
-        console.log("CAPI event sent successfully:", data);
-      })
-      .catch(error => {
-        console.error("Errore invio CAPI:", error);
-        // Fallback: Track client-side if server-side fails
-        if (fbPixelId !== '000' && typeof fbq !== 'undefined') {
-          fbq('track', eventName, customData, { eventID: payload.event_id });
-          console.warn(`Fallback: Tracked ${eventName} client-side due to CAPI failure`);
+
+        const data = await response.json();
+        console.log(`CAPI event '${eventName}' sent successfully (attempt ${attempt}):`, data);
+        return;
+      } catch (error) {
+        console.error(`Errore invio CAPI (attempt ${attempt}/${retries}):`, error);
+        if (attempt < retries) {
+          console.log(`Retrying in ${delay}ms...`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          delay *= 2; // Exponential backoff
+        } else {
+          console.error(`Failed to send CAPI event '${eventName}' after ${retries} attempts`);
+          $("#as_generic_error_message").text("Errore durante l'invio dei dati al server. Riprova.").show();
+          // Fallback: Track client-side
+          if (fbPixelId !== '000' && typeof fbq !== 'undefined') {
+            fbq('track', eventName, customData, { eventID: payload.event_id });
+            console.warn(`Fallback: Tracked ${eventName} client-side due to CAPI failure`);
+          }
         }
-      });
+      }
+    }
   }
 
   // Traccia PageView e ViewContent con deduplicazione
