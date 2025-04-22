@@ -130,7 +130,7 @@ $(document).ready(function($) {
       userAgent: navigator.userAgent,
       prodotto: "{{prodotto}}",
       custom_data: customData,
-      test_event_code: "TEST15338"
+      test_event_code: "TEST92713"
     };
 
     for (let attempt = 1; attempt <= retries; attempt++) {
