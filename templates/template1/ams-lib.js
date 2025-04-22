@@ -112,7 +112,10 @@ $(document).ready(function($) {
   function sendCapiEvent(eventName, customData = {}) {
     const fbPixelId = "{{fb_pixel}}";
     const fbAccessToken = "{{fb_access_token}}";
-    if (!fbAccessToken) return; // Invia alla CAPI solo se c'è un Access Token
+    if (!fbAccessToken) {
+      console.warn("No fb_access_token provided, skipping CAPI event");
+      return;
+    }
 
     const payload = {
       fb_pixel_id: fbPixelId,
@@ -133,12 +136,28 @@ $(document).ready(function($) {
     fetch("{{capi_endpoint}}", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(payload)
-    }).then(response => {
-      if (!response.ok) {
-        console.error("CAPI error:", response.status, response.statusText);
-      }
-    }).catch(error => console.error("Errore invio CAPI:", error));
+      body: JSON.stringify(payload),
+      mode: "cors", // Explicitly set CORS mode
+      credentials: "include" // Include credentials if needed
+    })
+      .then(response => {
+        if (!response.ok) {
+          console.error(`CAPI error: ${response.status} - ${response.statusText}`);
+          throw new Error(`CAPI request failed with status ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("CAPI event sent successfully:", data);
+      })
+      .catch(error => {
+        console.error("Errore invio CAPI:", error);
+        // Fallback: Track client-side if server-side fails
+        if (fbPixelId !== '000' && typeof fbq !== 'undefined') {
+          fbq('track', eventName, customData, { eventID: payload.event_id });
+          console.warn(`Fallback: Tracked ${eventName} client-side due to CAPI failure`);
+        }
+      });
   }
 
   // Traccia PageView e ViewContent con deduplicazione
