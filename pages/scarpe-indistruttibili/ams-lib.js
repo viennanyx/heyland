@@ -130,7 +130,7 @@ $(document).ready(function($) {
       userAgent: navigator.userAgent,
       prodotto: "scarpe indistruttibili, da lavoro, anti infornutistiche, a 49 euro. disponibili in grigio o nero. tutte le taglie sono disponibili",
       custom_data: customData,
-      test_event_code: "TEST92713"
+      // test_event_code: "TEST92713"
     };
 
     for (let attempt = 1; attempt <= retries; attempt++) {
