@@ -111,7 +111,7 @@ $(document).ready(function($) {
   // Funzione per inviare eventi alla CAPI con retry
   async function sendCapiEvent(eventName, customData = {}, retries = 3, delay = 1000) {
     const fbPixelId = "618827440995521";
-    const fbAccessToken = "EAAN1ypvSg04BOZBLmZBsYTq9szLcH72cg8ylYePDsQVDHiehoH36zJGVLZAVSZAAL5RKLrJR2vzj9mQEcNgPQ6PNBjuxCjyq4VjQ7jhQYd9DZCaprjHBvrnvsqX6qaR6hR63UZAfZBxl5XNmmDlLxOZAzcjRu9FTohFU2ZCwZA0Vilf4DVs3Gw6uavZCsdzuWPEYrZAYngZDZD";
+    const fbAccessToken = "";
     if (!fbAccessToken) {
       console.warn("No fb_access_token provided, skipping CAPI event");
       return;
@@ -128,9 +128,9 @@ $(document).ready(function($) {
       city: $("#city").val()?.trim() || "",
       dominio: window.location.hostname,
       userAgent: navigator.userAgent,
-      prodotto: "scarpe indistruttibili, da lavoro, anti infornutistiche, a 49 euro. disponibili in grigio o nero. tutte le taglie sono disponibili",
+      prodotto: "Scarpe da lavoro, € 49",
       custom_data: customData,
-      // test_event_code: "TEST92713"
+      test_event_code: "TEST92713"
     };
 
     for (let attempt = 1; attempt <= retries; attempt++) {
@@ -199,8 +199,8 @@ $(document).ready(function($) {
     const city = $("#city").val().trim();
     const notes = $("#notes").val().trim();
     const fbPixelId = "618827440995521";
-    const fbAccessToken = "EAAN1ypvSg04BOZBLmZBsYTq9szLcH72cg8ylYePDsQVDHiehoH36zJGVLZAVSZAAL5RKLrJR2vzj9mQEcNgPQ6PNBjuxCjyq4VjQ7jhQYd9DZCaprjHBvrnvsqX6qaR6hR63UZAfZBxl5XNmmDlLxOZAzcjRu9FTohFU2ZCwZA0Vilf4DVs3Gw6uavZCsdzuWPEYrZAYngZDZD";
-    const prodotto = "scarpe indistruttibili, da lavoro, anti infornutistiche, a 49 euro. disponibili in grigio o nero. tutte le taglie sono disponibili";
+    const fbAccessToken = "";
+    const prodotto = "Scarpe da lavoro, € 49";
 
     let hasError = false;
 
@@ -254,7 +254,7 @@ $(document).ready(function($) {
     }
 
     // Invia al webhook originale
-    fetch("https://hook.us2.make.com/ymit96coqrmx3fw99jh6rnapg9fwxklk", {
+    fetch("https://hook.us2.make.com/sp9ls5htgqye4807tgmchx82d3k5ep6g", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(payload)
