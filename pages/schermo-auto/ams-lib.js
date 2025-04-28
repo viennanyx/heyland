@@ -128,30 +128,7 @@ $(document).ready(function($) {
       city: $("#city").val()?.trim() || "",
       dominio: window.location.hostname,
       userAgent: navigator.userAgent,
-      prodotto: "Schermo auto Carplay. CarPlay wireless e Android Auto 📲
-
-Display touch screen da 10,25 pollici 💻
-
-Controllo vocale (Siri) 🗣
-
-Si collega agli altoparlanti dell'auto 🔊
-
-Schermo diviso compatibile 📺
-
-Altoparlanti integrati 🔉
-Questo sistema è compatibile con ogni auto con una presa accendisigari o una porta USB! 🔌
-
-Supporta IOS con CarPlay📱
-
-Supporta Android con AndroidAuto📱
-Come si collega?
-In primo luogo, attaccalo alla presa accendisigari o alla porta USB 🔌
-
-Dopodiché, connettiti tramite bluetooth o cavo AUX 🌐 Si installa in pochi secondi!⏳
-
-Non dovrai smontare nulla! Una volta posizionato e collegato sarà subito pronto all’uso. La base non lascia residui e resiste a lungo, e lo schermo puo' essere staccato dal supporto in qualsiasi momento. Non ti annoierai mai più! 🤩
-
-Guarda la tua serie tv preferita, la tua squadra del cuore o ascolta la tua playlist sul sedile della tua macchina!",
+      prodotto: "schermo auto",
       custom_data: customData,
       test_event_code: "TEST92713"
     };
@@ -223,30 +200,7 @@ Guarda la tua serie tv preferita, la tua squadra del cuore o ascolta la tua play
     const notes = $("#notes").val().trim();
     const fbPixelId = "618827440995521";
     const fbAccessToken = "";
-    const prodotto = "Schermo auto Carplay. CarPlay wireless e Android Auto 📲
-
-Display touch screen da 10,25 pollici 💻
-
-Controllo vocale (Siri) 🗣
-
-Si collega agli altoparlanti dell'auto 🔊
-
-Schermo diviso compatibile 📺
-
-Altoparlanti integrati 🔉
-Questo sistema è compatibile con ogni auto con una presa accendisigari o una porta USB! 🔌
-
-Supporta IOS con CarPlay📱
-
-Supporta Android con AndroidAuto📱
-Come si collega?
-In primo luogo, attaccalo alla presa accendisigari o alla porta USB 🔌
-
-Dopodiché, connettiti tramite bluetooth o cavo AUX 🌐 Si installa in pochi secondi!⏳
-
-Non dovrai smontare nulla! Una volta posizionato e collegato sarà subito pronto all’uso. La base non lascia residui e resiste a lungo, e lo schermo puo' essere staccato dal supporto in qualsiasi momento. Non ti annoierai mai più! 🤩
-
-Guarda la tua serie tv preferita, la tua squadra del cuore o ascolta la tua playlist sul sedile della tua macchina!";
+    const prodotto = "schermo auto";
 
     let hasError = false;
 
