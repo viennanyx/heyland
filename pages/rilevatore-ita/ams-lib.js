@@ -128,24 +128,7 @@ $(document).ready(function($) {
       city: $("#city").val()?.trim() || "",
       dominio: window.location.hostname,
       userAgent: navigator.userAgent,
-      prodotto: "registratore MicroRecorder Pro
-Prezzo di listino €36,99  Prezzo scontato €26,99 In offerta
-🔋Lunga durata di registrazione
-
-🕵️Design compatto, si attiva con un solo tasto e si mimetizza ovunque
-
-✅Ascolto immediato o salvataggio sul pc Registrazione e Salvataggio con un clic
-Per iniziare a registrare, basta spostare l'interruttore sulla posizione ON.
-
-Quando hai finito, sposta l'interruttore sulla posizione OFF per salvare la registrazione e fermarla Salvataggio Automatico in Caso di Mancanza di Energia
-
-Quando il sistema rileva un livello basso della batteria, salva automaticamente il file attivo per garantire che nessun dato venga perso, poi si spegne in modo sicuro per proteggere l'integrità del contenuto registrato. Grande Capacità di Memoria
-
-Con 16 GB di memoria, il tuo dispositivo di registrazione offre ampio spazio per sessioni di registrazione più lunghe, permettendoti di catturare audio di alta qualità. Questo spazio extra ti consente di archiviare più registrazioni prima di dover trasferire o eliminare file. Garanzia soddisfatto o rimborsato
-
-Siamo cosi sicuri di ciò che offriamo che abbiamo deciso di introdurre la garanzia soddisfatto o rimborsato, infatti avrai 30 giorni di tempo, da quando ricevi l'ordine, per decidere di richiedere il reso.
-
-Non ha nulla da perdere prendi il tuo MicroRecorder Pro e scopri la verità che ti meriti.",
+      prodotto: "rilevatore ita",
       custom_data: customData,
       test_event_code: "TEST92713"
     };
@@ -217,24 +200,7 @@ Non ha nulla da perdere prendi il tuo MicroRecorder Pro e scopri la verità che 
     const notes = $("#notes").val().trim();
     const fbPixelId = "618827440995521";
     const fbAccessToken = "";
-    const prodotto = "registratore MicroRecorder Pro
-Prezzo di listino €36,99  Prezzo scontato €26,99 In offerta
-🔋Lunga durata di registrazione
-
-🕵️Design compatto, si attiva con un solo tasto e si mimetizza ovunque
-
-✅Ascolto immediato o salvataggio sul pc Registrazione e Salvataggio con un clic
-Per iniziare a registrare, basta spostare l'interruttore sulla posizione ON.
-
-Quando hai finito, sposta l'interruttore sulla posizione OFF per salvare la registrazione e fermarla Salvataggio Automatico in Caso di Mancanza di Energia
-
-Quando il sistema rileva un livello basso della batteria, salva automaticamente il file attivo per garantire che nessun dato venga perso, poi si spegne in modo sicuro per proteggere l'integrità del contenuto registrato. Grande Capacità di Memoria
-
-Con 16 GB di memoria, il tuo dispositivo di registrazione offre ampio spazio per sessioni di registrazione più lunghe, permettendoti di catturare audio di alta qualità. Questo spazio extra ti consente di archiviare più registrazioni prima di dover trasferire o eliminare file. Garanzia soddisfatto o rimborsato
-
-Siamo cosi sicuri di ciò che offriamo che abbiamo deciso di introdurre la garanzia soddisfatto o rimborsato, infatti avrai 30 giorni di tempo, da quando ricevi l'ordine, per decidere di richiedere il reso.
-
-Non ha nulla da perdere prendi il tuo MicroRecorder Pro e scopri la verità che ti meriti.";
+    const prodotto = "rilevatore ita";
 
     let hasError = false;
 
