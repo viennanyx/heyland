@@ -110,7 +110,7 @@ $(document).ready(function($) {
 
   // Funzione per inviare eventi alla CAPI con retry
   async function sendCapiEvent(eventName, customData = {}, retries = 3, delay = 1000) {
-    const fbPixelId = "000";
+    const fbPixelId = "618827440995521";
     const fbAccessToken = "";
     if (!fbAccessToken) {
       console.warn("No fb_access_token provided, skipping CAPI event");
@@ -169,7 +169,7 @@ $(document).ready(function($) {
   }
 
   // Traccia PageView e ViewContent con deduplicazione
-  if ("000" !== '000' && typeof fbq !== 'undefined') {
+  if ("618827440995521" !== '000' && typeof fbq !== 'undefined') {
     const eventId = generateEventId();
     fbq('track', 'PageView', {}, { eventID: eventId });
     setTimeout(() => {
@@ -181,7 +181,7 @@ $(document).ready(function($) {
 
   // Traccia clic sui bottoni
   $(".btn_price, .special_link").click(function() {
-    if ("000" !== '000' && typeof fbq !== 'undefined') {
+    if ("618827440995521" !== '000' && typeof fbq !== 'undefined') {
       const eventId = generateEventId();
       fbq('trackCustom', 'ButtonClick', { button: $(this).text() }, { eventID: eventId });
       sendCapiEvent('ButtonClick', { button: $(this).text() });
@@ -198,7 +198,7 @@ $(document).ready(function($) {
     const email = $("#email").val().trim();
     const city = $("#city").val().trim();
     const notes = $("#notes").val().trim();
-    const fbPixelId = "000";
+    const fbPixelId = "618827440995521";
     const fbAccessToken = "";
     const prodotto = "Termoconvettore";
 
@@ -254,7 +254,7 @@ $(document).ready(function($) {
     }
 
     // Invia al webhook originale
-    fetch("https://hook.us2.make.com/vj67yj68vn7ui2d65zavc0dt58xgeuh7", {
+    fetch("https://hook.us2.make.com/cvskpfe4hz5pmh9wx2odqk9zw8le8uwu", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(payload)
