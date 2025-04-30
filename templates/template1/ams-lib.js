@@ -103,94 +103,15 @@ $(document).ready(function($) {
 
   $("#as_form_container").append(htmlResult);
 
-  // Funzione per generare un event_id unico
-  function generateEventId() {
-    return Date.now().toString() + Math.random().toString(36).substr(2, 9);
-  }
-
-  // Funzione per inviare eventi alla CAPI con retry
-  async function sendCapiEvent(eventName, customData = {}, retries = 3, delay = 1000) {
-    const fbPixelId = "{{fb_pixel}}";
-    const fbAccessToken = "{{fb_access_token}}";
-    if (!fbAccessToken) {
-      console.warn("No fb_access_token provided, skipping CAPI event");
-      return;
-    }
-
-    const payload = {
-      fb_pixel_id: fbPixelId,
-      fb_access_token: fbAccessToken,
-      event_name: eventName,
-      event_id: generateEventId(),
-      nomeCognome: $("#name").val()?.trim() || "",
-      telefono: $("#phone_number").val()?.trim() || "",
-      email: $("#email").val()?.trim() || "",
-      city: $("#city").val()?.trim() || "",
-      dominio: window.location.hostname,
-      userAgent: navigator.userAgent,
-      prodotto: "{{prodotto}}",
-      custom_data: customData,
-      test_event_code: "TEST92713"
-    };
-
-    for (let attempt = 1; attempt <= retries; attempt++) {
-      try {
-        const response = await fetch("{{capi_endpoint}}/capi", {
-          method: "POST",
-          headers: {"Content-Type": "application/json"},
-          body: JSON.stringify(payload),
-          mode: "cors",
-          credentials: "include"
-        });
-
-        if (!response.ok) {
-          throw new Error(`CAPI request failed with status ${response.status}: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        console.log(`CAPI event '${eventName}' sent successfully (attempt ${attempt}):`, data);
-        return;
-      } catch (error) {
-        console.error(`Errore invio CAPI (attempt ${attempt}/${retries}):`, error);
-        if (attempt < retries) {
-          console.log(`Retrying in ${delay}ms...`);
-          await new Promise(resolve => setTimeout(resolve, delay));
-          delay *= 2; // Exponential backoff
-        } else {
-          console.error(`Failed to send CAPI event '${eventName}' after ${retries} attempts`);
-          // Fallback: Track client-side
-          if (fbPixelId !== '000' && typeof fbq !== 'undefined') {
-            fbq('track', eventName, customData, { eventID: payload.event_id });
-            console.warn(`Fallback: Tracked ${eventName} client-side due to CAPI failure`);
-          }
-        }
-      }
-    }
-  }
-
-  // Traccia PageView e ViewContent con deduplicazione
-  if ("{{fb_pixel}}" !== '000' && typeof fbq !== 'undefined') {
-    const eventId = generateEventId();
-    fbq('track', 'PageView', {}, { eventID: eventId });
-    setTimeout(() => {
-      const viewContentId = generateEventId();
-      fbq('track', 'ViewContent', { value: 80, currency: 'EUR' }, { eventID: viewContentId });
-      sendCapiEvent('ViewContent', { value: 80, currency: 'EUR' });
-    }, 5000);
-  }
-
-  // Traccia clic sui bottoni
-  $(".btn_price, .special_link").click(function() {
-    if ("{{fb_pixel}}" !== '000' && typeof fbq !== 'undefined') {
-      const eventId = generateEventId();
-      fbq('trackCustom', 'ButtonClick', { button: $(this).text() }, { eventID: eventId });
-      sendCapiEvent('ButtonClick', { button: $(this).text() });
-    }
-  });
-
+  var formSubmitted = 0;
   $("#as_submit_order_button").click(function(e) {
     e.preventDefault();
     $(".as-error").removeClass("as-error");
+
+    if (formSubmitted > 0) {
+      $("#as_form_error_message").text("Hai già inviato il form.").show();
+      return;
+    }
 
     const nomeCognome = $("#name").val().trim();
     const telefono = $("#phone_number").val().trim();
@@ -221,7 +142,7 @@ $(document).ready(function($) {
       $("#as_form_error_message").hide();
     }
 
-    const eventId = generateEventId();
+    const eventId = Date.now().toString() + Math.random().toString(36).substr(2, 9);
     const now = new Date();
     const pageLang = document.documentElement.lang || navigator.language || 'en';
     const data = now.toLocaleDateString(pageLang);
@@ -248,12 +169,6 @@ $(document).ready(function($) {
       custom_data: { currency: "EUR", value: 1.0, content_name: prodotto }
     };
 
-    // Traccia Lead con Pixel
-    if (fbPixelId !== '000' && typeof fbq !== 'undefined') {
-      fbq('track', 'Lead', { currency: 'EUR', value: 1.0, content_name: prodotto }, { eventID: eventId });
-    }
-
-    // Invia al webhook originale
     fetch("https://hook.us2.make.com/vj67yj68vn7ui2d65zavc0dt58xgeuh7", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
@@ -264,17 +179,22 @@ $(document).ready(function($) {
         $("#as_generic_error_message").text("Errore durante l'invio dei dati.").show();
         throw new Error('Errore invio webhook');
       }
-      // Invia alla CAPI se c'è un Access Token
-      if (fbAccessToken) {
-        sendCapiEvent("Lead", { currency: "EUR", value: 1.0, content_name: prodotto });
-      }
-      window.location.href = startingJson.redirect_url + '?event_id=' + encodeURIComponent(eventId);
+      formSubmitted++;
+      const params = new URLSearchParams({
+        event_id: eventId,
+        nomeCognome: encodeURIComponent(nomeCognome),
+        telefono: encodeURIComponent(telefono),
+        email: encodeURIComponent(email || ''),
+        city: encodeURIComponent(city || ''),
+        indirizzo: encodeURIComponent(indirizzo || ''),
+        notes: encodeURIComponent(notes || ''),
+        prodotto: encodeURIComponent(prodotto)
+      });
+      window.location.href = startingJson.redirect_url + '?' + params.toString();
     })
     .catch(error => {
       $("#as_500_error_message").show();
       console.error("Errore invio webhook:", error);
     });
   });
-
-
 });

@@ -36,7 +36,7 @@
 <script defer src="assets/js/swiper-bundle.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> 
 
-<!-- Facebook Pixel Code to track PageView -->
+<!-- Facebook Pixel Code -->
 <script>
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -48,7 +48,8 @@
   'https://connect.facebook.net/en_US/fbevents.js');
   if ('{{fb_pixel}}' !== '000') {
     fbq('init', '{{fb_pixel}}');
-    fbq('track', 'PageView', {}, { eventID: Date.now().toString() + Math.random().toString(36).substr(2, 9) });
+    fbq('track', 'PageView');
+    setTimeout(function(){fbq('track', 'ViewContent', { value: 30, currency: 'EUR' })}, 10000);
   }
 </script>
 <!-- End Facebook Pixel Code -->
@@ -311,6 +312,56 @@
       </div>
     </div>
   </section>
+
+  
+<!-- Script per AddToCart e InitiateCheckout -->
+<script>
+if ('{{fb_pixel}}' !== '000') {
+  var addcart = 0;
+  var anchors = document.getElementsByTagName('a');
+  for(var z = 0; z < anchors.length; z++) {
+      var elem = anchors[z];   
+      elem.onclick = function() {
+          if(addcart==0) {
+              fbq('track','AddToCart');
+              addcart++;
+          }
+          return true; // Cambiato da false a true per non bloccare il comportamento del link
+      };
+  }
+
+  var initcheck=0;
+  document.addEventListener('keyup', function(){
+    if(initcheck==0) {
+      fbq('track','InitiateCheckout');
+      initcheck++;
+    }
+  });
+}
+</script>
+
+<!-- Script per AddToWishlist nella sezione recensioni -->
+<section class="bg-grey">
+  <div class="container"> 
+    <div class="row align-items-center justify-content-center text-center" id="RECE">
+      <!-- Contenuto della sezione recensioni invariato -->
+    </div>
+  </div>
+</section>
+<script>
+if ('{{fb_pixel}}' !== '000') {
+  var conta=0;
+  var target = document.querySelector('#RECE');
+  document.addEventListener('scroll', () => {
+    if (target && window.scrollY >= target.getBoundingClientRect().top) {
+       if (conta<1) {
+          fbq('track', 'AddToWishlist');
+          conta++;
+        }
+    }
+  });
+}
+</script>
 
   <a href="#" aria-hidden="true" data-attribute="back-to-top" id="myBtn" class="back-to-top back-to-top-small" style="position: fixed; bottom: 3%; right: 3%; z-index: 5"> <i class="fas fa-arrow-circle-up fa-2x"></i> </a>
 </main>
