@@ -313,7 +313,7 @@
     </div>
   </section>
 
-  
+
 <!-- Script per AddToCart e InitiateCheckout -->
 <script>
 if ('{{fb_pixel}}' !== '000') {
@@ -326,16 +326,23 @@ if ('{{fb_pixel}}' !== '000') {
               fbq('track','AddToCart');
               addcart++;
           }
-          return true; // Cambiato da false a true per non bloccare il comportamento del link
+          return true;
       };
   }
 
-  var initcheck=0;
-  document.addEventListener('keyup', function(){
-    if(initcheck==0) {
-      fbq('track','InitiateCheckout');
-      initcheck++;
-    }
+  var initcheck = 0;
+  // Select all input and textarea elements within the form container
+  var formInputs = document.querySelectorAll('#as_form_container input, #as_form_container textarea');
+  formInputs.forEach(function(input) {
+    // Trigger on input (typing, pasting, etc.) or focus (clicking into field)
+    ['input', 'focus'].forEach(function(eventType) {
+      input.addEventListener(eventType, function() {
+        if (initcheck === 0) {
+          fbq('track', 'InitiateCheckout');
+          initcheck++;
+        }
+      });
+    });
   });
 }
 </script>
@@ -363,7 +370,7 @@ if ('{{fb_pixel}}' !== '000') {
 }
 </script>
 
-  <a href="#" aria-hidden="true" data-attribute="back-to-top" id="myBtn" class="back-to-top back-to-top-small" style="position: fixed; bottom: 3%; right: 3%; z-index: 5"> <i class="fas fa-arrow-circle-up fa-2x"></i> </a>
+  <a href="#magma" aria-hidden="true" data-attribute="scroll-to-form" id="myBtn" class="back-to-top back-to-top-small" style="position: fixed; bottom: 3%; right: 3%; z-index: 5"> <i class="fas fa-arrow-circle-down fa-2x"></i> </a>
 </main>
 <footer class="footer mt-auto py-3 text-center">
   <div class="container">

@@ -53,34 +53,30 @@
       return;
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
     const payload = {
-      fb_pixel_id: fbPixelId,
-      fb_access_token: fbAccessToken,
-      event_name: eventName,
-      event_id: eventId,
-      nomeCognome: decodeURIComponent(urlParams.get('nomeCognome') || ''),
-      telefono: decodeURIComponent(urlParams.get('telefono') || ''),
-      email: decodeURIComponent(urlParams.get('email') || ''),
-      city: decodeURIComponent(urlParams.get('city') || ''),
-      indirizzo: decodeURIComponent(urlParams.get('indirizzo') || ''),
-      notes: decodeURIComponent(urlParams.get('notes') || ''),
-      dominio: window.location.hostname,
-      userAgent: navigator.userAgent,
-      prodotto: decodeURIComponent(urlParams.get('prodotto') || ''),
-      custom_data: customData
+      data: [{
+        event_name: eventName,
+        event_id: eventId,
+        event_time: Math.floor(Date.now() / 1000),
+        action_source: 'website',
+        user_data: {
+          client_user_agent: navigator.userAgent,
+          em: null, // Add email hashing if available
+          ph: null  // Add phone hashing if available
+        },
+        custom_data: customData
+      }],
+      access_token: fbAccessToken
     };
 
     const retries = 3;
     let delay = 1000;
     for (let attempt = 1; attempt <= retries; attempt++) {
       try {
-        const response = await fetch('{{capi_endpoint}}/capi', {
+        const response = await fetch('https://graph.facebook.com/v20.0/{{fb_pixel}}/events', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(payload),
-          mode: 'cors',
-          credentials: 'include'
+          body: JSON.stringify(payload)
         });
 
         if (!response.ok) {
